@@ -10,4 +10,4 @@ describe("1-module-1-task", function() {
         expect(pow(3, 4)).toEqual(81);
     });
 
-});s
+});
