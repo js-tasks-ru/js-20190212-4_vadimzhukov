@@ -6,17 +6,17 @@
  * @returns {number}
  */
 
-let numberToPower = 1;
-let power = 1;
-do {
-    numberToPower = +prompt("Введите положительное число - основание для возведения в степень", 1);
-
-} while (isNaN(numberToPower));
-
-do {
-    power = +prompt("Введите положительное число - степень ", 1);
-
-} while (isNaN(power));
+// let numberToPower = 1;
+// let power = 1;
+// do {
+//     numberToPower = +prompt("Введите положительное число - основание для возведения в степень", 1);
+//
+// } while (isNaN(numberToPower));
+//
+// do {
+//     power = +prompt("Введите положительное число - степень ", 1);
+//
+// } while (isNaN(power));
 
 alert(pow(numberToPower, power));
 
