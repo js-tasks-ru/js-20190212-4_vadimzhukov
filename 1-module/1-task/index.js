@@ -18,7 +18,7 @@
 //
 // } while (isNaN(power));
 
-alert(pow(numberToPower, power));
+// alert(pow(numberToPower, power));
 
 function pow (m, n) {
     let result=1;
