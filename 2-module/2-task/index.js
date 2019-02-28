@@ -5,48 +5,50 @@
  * @returns {Object}
  */
 function find (obj, value) {
-    const paths = [];
-    for (let key in obj) {
-        if (obj[key] === value) {
-            paths.push(key);
-        }
-        if (typeof(obj[key]) === 'object') {
-            if (findInObject(obj[key], value, key) !== null ) {
-                paths.push(findInObject(obj[key], value, key));
-            }
-        }
-
+    let result = [];
+    result = findInObject(obj, value, '');
+    debugger;
+    if (result.length == 1) {
+        return result[0];
     }
-    return (paths.length == 1) ? paths[0] : paths;
-}
+    if (result.length > 1) {
+        return result;
+    }
+    if (result.length == 0) {
+        return null;
+    }
+};
 
 function findInObject(obj, value, path) {
+    let result = [];
+
     for (let k in obj) {
+        path = '';
         if (obj[k] === value) {
-            return path + '.' + k;
+            result.push(k);
         }
         if (typeof(obj[k]) === 'object') {
-            path = path + '.' + k;
-            return findInObject(obj[k], value, path);
-        } else {
-            return null;
+            path = (!path) ? k : (path + '.' + k);
+            result = result.concat(findInObject(obj[k], value, path).map( item => path + '.' + item));
+
         }
     }
+
+    return result;
 }
 
 let obj = {
     options: {
-        color: 'red'
+        color: 'red',
+        backgroundColor: 'red',
+        borderColor: 'green'
     },
     style: {
-            border: {
-                color: 'red'
-            },
-            border2: {
-                color: 'red'
+        border: {
+            color: 'red'
         }
     }
 };
-// console.log(find(obj, 'red'));
-//
-// console.log(JSON.stringify(find(obj, 'red')));// !== JSON.stringify(['options.color', 'style.border.color']));
+console.log(find(obj, 'red')); //Тест1. Должно быть три значение, а вернуло только 2
+console.log(find(obj, 'red2')); // по условию задачи "Если ничего не найденно, то функция должна вернуть null", а вернулся пустой массив
+console.log(find(obj, 'green')); // Тест 3. Должен был вернуть options.green, а вернул пустой массив
